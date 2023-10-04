@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 97%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Formulário de Cadastro Completo</h2>
+        <form action="processar_cadastro.php" method="post">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+
+            <label for="confirmar_senha">Confirmar Senha:</label>
+            <input type="password" id="confirmar_senha" name="confirmar_senha" required>
+
+            <label for="sexo">Sexo:</label>
+            <input type="radio" id="sexo_masculino" name="sexo" value="masculino" required>
+            <label for="sexo_masculino">Masculino</label>
+            <input type="radio" id="sexo_feminino" name="sexo" value="feminino" required>
+            <label for="sexo_feminino">Feminino</label>
+
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" required>
+                <option value="ac">Acre</option> 
+                <option value="al">Alagoas</option> 
+                <option value="am">Amazonas</option> 
+                <option value="ap">Amapá</option> 
+                <option value="ba">Bahia</option> 
+                <option value="ce">Ceará</option> 
+                <option value="df">Distrito Federal</option> 
+                <option value="es">Espírito Santo</option> 
+                <option value="go">Goiás</option> 
+                <option value="ma">Maranhão</option> 
+                <option value="mt">Mato Grosso</option> 
+                <option value="ms">Mato Grosso do Sul</option> 
+                <option value="mg">Minas Gerais</option> 
+                <option value="pa">Pará</option> 
+                <option value="pb">Paraíba</option> 
+                <option value="pr">Paraná</option> 
+                <option value="pe">Pernambuco</option> 
+                <option value="pi">Piauí</option> 
+                <option value="rj">Rio de Janeiro</option> 
+                <option value="rn">Rio Grande do Norte</option> 
+                <option value="ro">Rondônia</option> 
+                <option value="rs">Rio Grande do Sul</option> 
+                <option value="rr">Roraima</option> 
+                <option value="sc">Santa Catarina</option> 
+                <option value="se">Sergipe</option> 
+                <option value="sp">São Paulo</option> 
+                <option value="to">Tocantins</option>
+                <!-- Adicione mais estados aqui -->
+            </select>
+
+            <label for="municipio">Município:</label>
+            <select id="municipio" name="municipio" required>
+                <!-- Adicione municípios correspondentes ao estado selecionado aqui -->
+            </select>
+
+            <label for="interesses">Interesses:</label>
+            <input type="checkbox" id="interesse_esportes" name="interesses[]" value="esportes">
+            <label for="interesse_esportes">Esportes</label>
+            <input type="checkbox" id="interesse_musica" name="interesses[]" value="musica">
+            <label for="interesse_musica">Música</label>
+            <input type="checkbox" id="interesse_tecnologia" name="interesses[]" value="tecnologia">
+            <label for="interesse_tecnologia">Tecnologia</label>
+            <!-- Adicione mais interesses aqui -->
+
+            <label for="pergunta_seguranca">Pergunta de Segurança:</label>
+            <input type="text" id="pergunta_seguranca" name="pergunta_seguranca" required>
+
+            <input type="submit" value="Cadastrar">
+        </form>
+    </div>
+
+    <script>
+        // Script para carregar municípios com base no estado selecionado
+        document.getElementById("estado").addEventListener("change", function() {
+            const estadoSelecionado = this.value;
+            const municipioSelect = document.getElementById("municipio");
+            municipioSelect.innerHTML = ""; // Limpa os municípios existentes
+
+            if (estadoSelecionado === "mg") {
+                const municipiosSP = ["Minas Gerais", "Uberlandia", "Araguari"];
+                municipiosSP.forEach(function(municipio) {
+                    const option = document.createElement("option");
+                    option.value = municipio;
+                    option.text = municipio;
+                    municipioSelect.appendChild(option);
+                });
+            } else if (estadoSelecionado === "rj") {
+                const municipiosRJ = ["Rio de Janeiro", "Niterói", "Petrópolis"];
+                municipiosRJ.forEach(function(municipio) {
+                    const option = document.createElement("option");
+                    option.value = municipio;
+                    option.text = municipio;
+                    municipioSelect.appendChild(option);
+                });
+
+            }
+            // Adicione mais estados e municípios aqui
+        });
+    </script>
+</body>
+</html>
